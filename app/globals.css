@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.product-card:hover .product-btns{
+  bottom: 1rem;
+}
+
+.product-btns{
+  transition: all 0.5s;
+}
+
+ body{
+  background: white !important;
+ }
+
+ .content *::-webkit-scrollbar{
+  display: none;
+ }
+ 
+ @font-face {
+  font-family: gothic;
+  src: url(/fonts/CenturyGothicPaneuropeanRegular.ttf);
+ }
+
+ .lineClamp1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ .lineClamp2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+ 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
