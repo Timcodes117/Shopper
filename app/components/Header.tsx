@@ -8,12 +8,19 @@ import { CgSearch, CgShoppingCart } from "react-icons/cg";
 import AuthChecker from "./AuthChecker";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { LuShoppingCart } from "react-icons/lu";
+import Link from "next/link";
+import { cartTypes, useCartStore } from "../store/cartStore";
 
-const GlobalHeader = () => {
+const GlobalHeader = ({transparent}:{transparent?: boolean}) => {
+  const cartItems = useCartStore<cartTypes[]>(state=> state.cartItems)
   return (
-    <header className="w-full h-[70px] z-[20000] bg-white border-b fixed top-0 flex flex-row items-center justify-between px-[5vw]">
+    <header style={transparent ? {border: "none", background: "none", position: "absolute" } : {background: "white"}}
+     className="w-full h-[70px] z-[20000]  border-b fixed top-0 flex flex-row items-center justify-between px-[5vw]">
       <div className="flex flex-row items-center gap-20">
-        <div className="flex flex-row items-center gap-2 cursor-pointer" onClick={()=> location.reload()}>
+        <div
+          className="flex flex-row items-center gap-2 cursor-pointer"
+          onClick={() => window.open("/", "_parent")}
+        >
           <ShoppingBagIcon width={25} height={25} color="black" />
           <p>Shopper</p>
         </div>
@@ -22,19 +29,28 @@ const GlobalHeader = () => {
             <p>Categories</p>
             <ChevronDownIcon width={16} height={16} />
           </div>
-            <p className="hover:text-[orangered] cursor-pointer">Contact us</p>
-            <p className="hover:text-[orangered] cursor-pointer">About</p>
+          <p className="hover:text-[orangered] cursor-pointer">Contact us</p>
+          <p className="hover:text-[orangered] cursor-pointer">About</p>
         </nav>
       </div>
 
       <div className="flex flex-row items-center gap-[20px]">
-        <CgSearch size={22.5} className="cursor-pointer active:opacity-[0.5]" />
-        <div className="relative cursor-pointer active:opacity-[0.5]">
-          <LuShoppingCart size={22.5} />
-          <div 
-          className="w-[12px] h-[12px] rounded-[100px] bg-[red] absolute top-[-2.5px] right-[-3px] flex items-center justify-center text-[white]"
-           > {<div className="text-[8px]">20</div>} </div>
-        </div>
+        <Link href={"/discover/"}>
+          <CgSearch
+            size={22.5}
+            className="cursor-pointer active:opacity-[0.5]"
+          />
+        </Link>
+        <Link href={"/cart/"}>
+          <div className="relative cursor-pointer active:opacity-[0.5]">
+            <LuShoppingCart size={22.5} />
+            {cartItems.length >= 1 && <div
+             className="w-[12px] h-[12px] rounded-[100px] bg-[red] absolute top-[-2.5px] right-[-3px] flex items-center justify-center text-[white]">
+              {" "}
+              {<div className="text-[8px]">{cartItems.length > 1 ? cartItems.length : ""}</div>}{" "}
+            </div>}
+          </div>
+        </Link>
 
         <AuthChecker />
       </div>

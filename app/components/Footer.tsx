@@ -8,7 +8,7 @@ const CustomFooter = () => {
         <strong className="mt-[50px] w-[70%] text-center  text-[30px]">
           Subscribe to Our Newsletter
         </strong>
-        <p className=" w-[80%] text-center text-[15px] max-w-[600px]">
+        <p className=" md:w-[80%] w-full text-center md:text-[14px] text-[12px] max-w-[600px]">
           Stay In the Loop - Subscribe to Our Newsletter for Exclusive Updates,
           Industry Insights, and Special Offers!"
         </p>

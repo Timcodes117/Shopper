@@ -9,13 +9,13 @@ const ProductShowcase = () => {
           >
             <div className="flex flex-col  w-full">
               <strong
-                className="text-[40px] font-[gothic] w-[80%] max-w-[500px] text-start mt-2   mb-1 uppercase"
+                className="md:text-[40px] text-[30px] font-[gothic] w-[80%] max-w-[500px] text-start mt-2   mb-1 uppercase"
                 style={{ lineHeight: 1 }}
               >
                  Blue Lace-up Sneakers
 
               </strong>
-              <p className="text-[30px] text-[orangered]">₦5,000</p>
+              <p className="md:text-[30px] text-[20px] text-[orangered]">₦5,000</p>
               <div className="w-full flex gap-2 flex-row justify-end mt-4 items-center z-[1000]">
                 <button className="w-[150px] h-[50px] bg-black rounded-[8px]  cursor-pointer active:opacity-[0.7] ">
                   Add to cart

@@ -1,6 +1,5 @@
-import {create} from "zustand"
 
-export type products = {
+export type productsType = {
     id: any;
     image: string[];
     name: string;
@@ -8,6 +7,8 @@ export type products = {
     price: number;
     discount: any;
     quantity: number;
+    bg_size: string;
+    category: string[];
 }
 
 export type cartItems = {
@@ -16,5 +17,6 @@ export type cartItems = {
     name: string,
     price: number,
     discount?: number,
+    bg_size: string
 }
 

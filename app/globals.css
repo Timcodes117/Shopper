@@ -26,7 +26,7 @@
 
  .lineClamp1 {
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* Limit to 2 lines */
+  -webkit-line-clamp: 1; /* Limit to 1 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -39,6 +39,90 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+ .lineClamp3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.isOff{
+  position: relative;
+  overflow: hidden;
+  /* --_ang: any */
+}
+
+.isOff::before{
+  content: "";
+  width: 80px;
+  height: 300px;
+  pointer-events: none;
+  background: orangered;
+  pointer-events: none;
+  border-right: 10px solid #f5f5f534;
+  position: absolute;
+  right: 20px;
+  transform: rotate(30deg);
+
+}
+
+.blured-bg{
+  /* background: rgba(255, 0, 0, 0.171); */
+  background-size: cover;
+  /* backdrop-filter: blur(100px); */
+}
+
+.s_hero{
+  position: relative;
+  border-radius: 0px 200px 50px 200px;
+  /* backdrop-filter: opacity(0.1px); */
+  /* background-blend-mode:hard-light; */
+}
+.s_hero::after{
+  content: "";
+  width: 200px;
+  height: 200px;
+  background: none;
+  border: 50px solid white;
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+  border-radius: 100px;
+}
+
+.s_hero::before{
+  content: "";
+  width: 200px;
+  height: 200px;
+  border: 50px solid white;
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  border-radius: 100px;
+}
+
+ 
+.itemNotAvailable::before{
+  content: "Sold out";
+  color: white;
+  text-transform: uppercase;
+  justify-content: center;
+  width: 250px;
+  height: 50px;
+  pointer-events: none;
+  background: orangered;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  right: -50px;
+  transform: rotate(-30deg);
+
+}
+
+ 
 
  
 @layer utilities {

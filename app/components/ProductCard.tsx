@@ -3,21 +3,28 @@ import React from "react";
 import { BiHeart } from "react-icons/bi";
 import { BsHeartFill, BsHeartHalf } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
-import { products } from "../store/appstore";
+import { productsType } from "../store/storeTypes";
+import { useCartStore } from "../store/cartStore";
+import { toast } from "react-toastify";
 
-const ProductCard = (props: products) => {
+const ProductCard = (props: productsType) => {
   const [isFavourite, setFavourite] = React.useState<any>(null);
+  const cartItems = useCartStore((state) => state.cartItems);
+  const addItem = useCartStore((state) => state.addToCart);
 
   return (
-    <div className="min-h-[200px] flex flex-col mt-4 sm:mt-0  product-card  " key={props.id} >
+    <div
+      className="min-h-[200px] flex flex-col mt-4 sm:mt-0  product-card  "
+      key={props.id}
+    >
       <div className="w-full md:h-[250px]  sm:h-[200px] h-[150px] bg-[whitesmoke] rounded-xl overflow-hidden relative cursor-pointer flex items-center justify-center">
         <div
           style={{
             transition: "all 0.5s",
-            background: `url(/${props.image[0]}) center no-repeat`,
-            backgroundSize: "contain",
+            background: `url(${props.image[0]}) center no-repeat`,
+            backgroundSize: props.bg_size,
           }}
-          onClick={()=> window.open("/product_info/" + props.id, "_parent")}
+          onClick={() => window.open("/product_info/" + props.id, "_parent")}
           className="w-full h-[250px] scale-[1.0] hover:scale-[1.2] bg-[whitesmoke] rounded-xl   bg-contain bg-center bg-no-repeat "
         />
         <div
@@ -83,15 +90,26 @@ const ProductCard = (props: products) => {
               <HeartIcon width={23} height={23} />
             )}
           </button>
-          <button
+          {props.quantity > 1 && <button
             style={{ transition: "all 0.5s" }}
-            className="w-[40px] h-[40px] scale-[1.0] hover:scale-[1.1] hover:mb-[8px] bg-black rounded-md flex items-center justify-center"
+            onClick={() =>
+              addItem(
+                props.id,
+                props.name,
+                props.price - (props.discount ? props.discount / 100 : 0),
+                props.discount,
+                1,
+                props.image[0],
+                props.bg_size
+              )
+            }
+            className="w-[40px] h-[40px] scale-[1.0] hover:scale-[1.1] hidden hover:mb-[8px] bg-black rounded-md md:flex items-center justify-center"
           >
             <MdAddShoppingCart size={23} color="white" />
-          </button>
+          </button>}
         </div>
       </div>
-      <p className="text-[16px] w-full text-start mt-1 md:hidden font-semibold font-[gothic] flex line-clamp-1 uppercase ">
+      <p className="text-[16px] w-full text-start mt-1 md:hidden font-semibold font-[gothic] flex lineClamp1 uppercase ">
         {props.name}
       </p>
       <p className="text-[14px] w-full text-start md:hidden flex text-[orangered]">
@@ -109,6 +127,31 @@ const ProductCard = (props: products) => {
           </s>
         </div>
       )}
+      {props.quantity >= 1 ? <button
+        onClick={() =>
+          addItem(
+            props.id,
+            props.name,
+            props.price - (props.discount ? props.discount / 100 : 0),
+            props.discount,
+            1,
+            props.image[0],
+            props.bg_size
+          )
+        }
+        className="text-[14px] w-full h-[40px] text-start md:hidden flex text-white my-1 rounded flex-row items-center justify-center bg-[orangered]"
+      >
+        add to cart
+      </button> :
+      <button
+      onClick={() =>
+        toast.warning("item is not available or sold out")
+      }
+      className="text-[14px] w-full h-[40px] text-start md:hidden opacity-[0.5] flex text-white my-1 rounded flex-row items-center justify-center bg-[orangered]"
+    >
+      add to cart
+    </button>
+  }
     </div>
   );
 };
